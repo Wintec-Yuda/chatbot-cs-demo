@@ -1,0 +1,170 @@
+[
+	{
+		"id": 1,
+		"name": "Nasi Kucing",
+		"category": "makanan",
+		"price": 5000,
+		"composition": "Nasi putih, sambal teri, daun pisang"
+	},
+	{
+		"id": 2,
+		"name": "Sate Usus",
+		"category": "makanan",
+		"price": 3000,
+		"composition": "Usus ayam, kecap manis, bawang putih, tusuk sate"
+	},
+	{
+		"id": 3,
+		"name": "Gorengan Tempe",
+		"category": "makanan",
+		"price": 2000,
+		"composition": "Tempe, tepung terigu, bawang putih, garam"
+	},
+	{
+		"id": 4,
+		"name": "Bakmi Jawa",
+		"category": "makanan",
+		"price": 12000,
+		"composition": "Mie kuning, telur, kol, bawang putih, kaldu ayam"
+	},
+	{
+		"id": 5,
+		"name": "Tahu Bacem",
+		"category": "makanan",
+		"price": 2500,
+		"composition": "Tahu, gula merah, lengkuas, daun salam, kecap manis"
+	},
+	{
+		"id": 6,
+		"name": "Sate Telur Puyuh",
+		"category": "makanan",
+		"price": 4000,
+		"composition": "Telur puyuh rebus, kecap manis, bawang putih"
+	},
+	{
+		"id": 7,
+		"name": "Orek Tempe",
+		"category": "makanan",
+		"price": 5000,
+		"composition": "Tempe, kecap manis, cabai merah, daun salam"
+	},
+	{
+		"id": 8,
+		"name": "Sego Pecel",
+		"category": "makanan",
+		"price": 10000,
+		"composition": "Nasi putih, sayuran rebus, sambal kacang"
+	},
+	{
+		"id": 9,
+		"name": "Ayam Goreng",
+		"category": "makanan",
+		"price": 15000,
+		"composition": "Ayam, bawang putih, ketumbar, garam"
+	},
+	{
+		"id": 10,
+		"name": "Bakwan Sayur",
+		"category": "makanan",
+		"price": 2000,
+		"composition": "Wortel, kol, tepung terigu, daun bawang"
+	},
+	{
+		"id": 11,
+		"name": "Wedang Jahe",
+		"category": "minuman",
+		"price": 7000,
+		"composition": "Jahe, gula merah, air panas, serai"
+	},
+	{
+		"id": 12,
+		"name": "Es Teh Manis",
+		"category": "minuman",
+		"price": 5000,
+		"composition": "Teh celup, gula pasir, air, es batu"
+	},
+	{
+		"id": 13,
+		"name": "Kopi Tubruk",
+		"category": "minuman",
+		"price": 8000,
+		"composition": "Bubuk kopi, gula, air panas"
+	},
+	{
+		"id": 14,
+		"name": "Es Jeruk",
+		"category": "minuman",
+		"price": 6000,
+		"composition": "Jeruk peras, gula, air, es batu"
+	},
+	{
+		"id": 15,
+		"name": "Teh Panas",
+		"category": "minuman",
+		"price": 4000,
+		"composition": "Teh celup, gula pasir, air panas"
+	},
+	{
+		"id": 16,
+		"name": "Mie Ayam",
+		"category": "makanan",
+		"price": 15000,
+		"composition": "Mie kuning, ayam, sawi, jamur, kaldu ayam"
+	},
+	{
+		"id": 17,
+		"name": "Nasi Campur",
+		"category": "makanan",
+		"price": 13000,
+		"composition": "Nasi, ayam, sambal, sayur, telur"
+	},
+	{
+		"id": 18,
+		"name": "Es Kelapa Muda",
+		"category": "minuman",
+		"price": 9000,
+		"composition": "Kelapa muda, air kelapa, es batu"
+	},
+	{
+		"id": 19,
+		"name": "Smoothie Mangga",
+		"category": "minuman",
+		"price": 12000,
+		"composition": "Mangga, susu, es batu"
+	},
+	{
+		"id": 20,
+		"name": "Roti Bakar Cokelat Keju",
+		"category": "camilan",
+		"price": 8000,
+		"composition": "Roti, cokelat, keju"
+	},
+	{
+		"id": 21,
+		"name": "Pisang Goreng",
+		"category": "camilan",
+		"price": 4000,
+		"composition": "Pisang, tepung terigu, minyak"
+	},
+	{
+		"id": 22,
+		"name": "Sup Ayam",
+		"category": "makanan",
+		"price": 12000,
+		"composition": "Ayam, wortel, kentang, kaldu ayam"
+	},
+	{
+		"id": 23,
+		"name": "Tahu Tempe Mendoan",
+		"category": "camilan",
+		"price": 6000,
+		"composition": "Tahu, tempe, tepung terigu, daun bawang"
+	},
+	{
+		"id": 24,
+		"name": "Kue Cubir",
+		"category": "camilan",
+		"price": 3500,
+		"composition": "Tepung terigu, gula merah, kelapa parut"
+	}
+]
