@@ -342,7 +342,7 @@ export default function ChatPage() {
 							value={input}
 							onChange={(e) => {
 								const value = e.target.value;
-								if (value.length <= 300) setInput(value);
+								if (value.length <= 100) setInput(value);
 							}}
 							onKeyDown={(e) => e.key === "Enter" && handleSend(null)}
 							className={`w-full border rounded-full px-5 py-3 pr-12 focus:outline-none focus:ring-2 transition-all duration-200 ${
@@ -362,7 +362,7 @@ export default function ChatPage() {
 										: "text-gray-400 bg-gray-100"
 								}`}
 							>
-								{input.length}/300
+								{input.length}/100
 							</motion.span>
 						)}
 					</motion.div>
