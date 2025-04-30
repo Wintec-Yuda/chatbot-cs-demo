@@ -345,7 +345,7 @@ export default function ChatPage() {
 								if (value.length <= 100) setInput(value);
 							}}
 							onKeyDown={(e) => e.key === "Enter" && handleSend(null)}
-							className={`w-full border rounded-full px-5 py-3 pr-12 focus:outline-none focus:ring-2 transition-all duration-200 ${
+							className={`w-full border rounded-full px-5 pt-4 pb-2 pr-12 focus:outline-none focus:ring-2 transition-all duration-200 ${
 								darkMode
 									? "bg-gray-700 border-gray-600 focus:ring-blue-600 focus:border-transparent text-white"
 									: "bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-transparent"
@@ -356,7 +356,7 @@ export default function ChatPage() {
 							<motion.span
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
-								className={`absolute right-3 top-3 text-xs px-2 py-0.5 rounded-full ${
+								className={`absolute right-3 top-0 text-xs px-2 py-0.5 rounded-full ${
 									darkMode
 										? "text-gray-300 bg-gray-600"
 										: "text-gray-400 bg-gray-100"
