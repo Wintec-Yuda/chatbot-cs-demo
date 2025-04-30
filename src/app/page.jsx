@@ -25,7 +25,7 @@ export default function ChatPage() {
 
 	useEffect(() => {
 		// Jalankan hanya saat komponen pertama kali dimount
-		handleSend("Apa saja daftar menu disini?");
+		handleSend("Ada apa saja menu disini?");
 	}, []);
 
 	const handleSend = async (initialInput) => {
