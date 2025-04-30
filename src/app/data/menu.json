@@ -166,5 +166,187 @@
 		"category": "camilan",
 		"price": 3500,
 		"composition": "Tepung terigu, gula merah, kelapa parut"
+	},
+	{
+		"id": 25,
+		"name": "Nasi Goreng Special",
+		"category": "makanan",
+		"price": 18000,
+		"composition": "Nasi, ayam, udang, telur, sayuran"
+	},
+	{
+		"id": 26,
+		"name": "Es Campur",
+		"category": "minuman",
+		"price": 10000,
+		"composition": "Kelapa muda, nata de coco, alpukat, sirup, es batu"
+	},
+	{
+		"id": 27,
+		"name": "Lumpia Semarang",
+		"category": "camilan",
+		"price": 7000,
+		"composition": "Kulit lumpia, rebung, daging ayam, bumbu rempah"
+	},
+	{
+		"id": 28,
+		"name": "Soto Ayam",
+		"category": "makanan",
+		"price": 14000,
+		"composition": "Ayam, kunyit, santan, soun, daun bawang"
+	},
+	{
+		"id": 29,
+		"name": "Klepon",
+		"category": "camilan",
+		"price": 3000,
+		"composition": "Tepung ketan, gula merah, kelapa parut"
+	},
+	{
+		"id": 30,
+		"name": "Es Dawet",
+		"category": "minuman",
+		"price": 8000,
+		"composition": "Cendol, santan, gula merah, es batu"
+	},
+	{
+		"id": 31,
+		"name": "Gado-Gado",
+		"category": "makanan",
+		"price": 12000,
+		"composition": "Sayuran rebus, telur, tahu, tempe, sambal kacang"
+	},
+	{
+		"id": 32,
+		"name": "Martabak Manis",
+		"category": "camilan",
+		"price": 15000,
+		"composition": "Tepung terigu, gula, susu kental manis, margarin"
+	},
+	{
+		"id": 33,
+		"name": "Rawon",
+		"category": "makanan",
+		"price": 17000,
+		"composition": "Daging sapi, keluak, daun bawang, tauge"
+	},
+	{
+		"id": 34,
+		"name": "Es Cincau",
+		"category": "minuman",
+		"price": 6000,
+		"composition": "Cincau hitam, santan, gula merah, es batu"
+	},
+	{
+		"id": 35,
+		"name": "Serabi",
+		"category": "camilan",
+		"price": 5000,
+		"composition": "Tepung beras, santan, gula merah"
+	},
+	{
+		"id": 36,
+		"name": "Bubur Ayam",
+		"category": "makanan",
+		"price": 10000,
+		"composition": "Bubur nasi, ayam suwir, kecap, kerupuk"
+	},
+	{
+		"id": 37,
+		"name": "Kue Lapis",
+		"category": "camilan",
+		"price": 4000,
+		"composition": "Tepung beras, santan, gula, pewarna makanan"
+	},
+	{
+		"id": 38,
+		"name": "Sop Buntut",
+		"category": "makanan",
+		"price": 25000,
+		"composition": "Buntut sapi, wortel, kentang, tomat, daun bawang"
+	},
+	{
+		"id": 39,
+		"name": "Es Teler",
+		"category": "minuman",
+		"price": 12000,
+		"composition": "Alpukat, kelapa muda, nangka, susu, es batu"
+	},
+	{
+		"id": 40,
+		"name": "Pempek",
+		"category": "makanan",
+		"price": 15000,
+		"composition": "Ikan, tepung sagu, cuko, timun"
+	},
+	{
+		"id": 41,
+		"name": "Kue Putu",
+		"category": "camilan",
+		"price": 3000,
+		"composition": "Tepung beras, gula merah, kelapa parut"
+	},
+	{
+		"id": 42,
+		"name": "Es Kopyor",
+		"category": "minuman",
+		"price": 11000,
+		"composition": "Kelapa kopyor, nata de coco, sirup, es batu"
+	},
+	{
+		"id": 43,
+		"name": "Rendang",
+		"category": "makanan",
+		"price": 20000,
+		"composition": "Daging sapi, santan, bumbu rempah, kelapa"
+	},
+	{
+		"id": 44,
+		"name": "Cendol",
+		"category": "minuman",
+		"price": 7000,
+		"composition": "Tepung beras, gula merah, santan, es batu"
+	},
+	{
+		"id": 45,
+		"name": "Kerak Telor",
+		"category": "camilan",
+		"price": 10000,
+		"composition": "Beras ketan, telur, ebi, kelapa parut"
+	},
+	{
+		"id": 46,
+		"name": "Sate Maranggi",
+		"category": "makanan",
+		"price": 20000,
+		"composition": "Daging sapi, kecap manis, bawang merah, ketumbar"
+	},
+	{
+		"id": 47,
+		"name": "Es Selendang Mayang",
+		"category": "minuman",
+		"price": 9000,
+		"composition": "Tepung hunkwe, santan, gula merah, es batu"
+	},
+	{
+		"id": 48,
+		"name": "Lemper",
+		"category": "camilan",
+		"price": 5000,
+		"composition": "Ketepung ketan, ayam suwir, daun pisang"
+	},
+	{
+		"id": 49,
+		"name": "Soto Betawi",
+		"category": "makanan",
+		"price": 18000,
+		"composition": "Daging sapi, santan, susu, kentang, tomat"
+	},
+	{
+		"id": 50,
+		"name": "Es Bir",
+		"category": "minuman",
+		"price": 8000,
+		"composition": "Jahe, kayu manis, gula merah, es batu"
 	}
 ]

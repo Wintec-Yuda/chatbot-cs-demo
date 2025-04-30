@@ -23,37 +23,40 @@ export default function ChatPage() {
 		}
 	}, [messages]);
 
-  useEffect(() => {
-    // Jalankan hanya saat komponen pertama kali dimount
-    handleSend("Apa daftar menu?");
-  }, []);  
+	useEffect(() => {
+		// Jalankan hanya saat komponen pertama kali dimount
+		handleSend("Apa saja daftar menu disini?");
+	}, []);
 
-  const handleSend = async (initialInput) => {
-    const messageText = initialInput ?? input;
-  
-    if (!messageText.trim()) {
-      setError("Tolong masukkan pertanyaan terlebih dahulu!");
-      return;
-    }
-  
-    const userMessage = { role: "user", text: messageText };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
-    setLoading(true);
-    setError("");
-  
-    try {
-      const prompt = buildPromptMenu(menu, messageText);
-      const botReply = await generate(prompt);
-      const botMessage = { role: "bot", text: botReply };
-      setMessages((prev) => [...prev, botMessage]);
-    } catch (error) {
-      console.log(error);
-      setMessages((prev) => [...prev, { role: "bot", text: "❌ Tolong ulangi pertanyaanmu!" }]);
-    } finally {
-      setLoading(false);
-    }
-  };  
+	const handleSend = async (initialInput) => {
+		const messageText = initialInput ?? input;
+
+		if (!messageText.trim()) {
+			setError("Tolong masukkan pertanyaan terlebih dahulu!");
+			return;
+		}
+
+		const userMessage = { role: "user", text: messageText };
+		setMessages((prev) => [...prev, userMessage]);
+		setInput("");
+		setLoading(true);
+		setError("");
+
+		try {
+			const prompt = buildPromptMenu(menu, messageText);
+			const botReply = await generate(prompt);
+			const botMessage = { role: "bot", text: botReply };
+			setMessages((prev) => [...prev, botMessage]);
+		} catch (error) {
+			console.log(error);
+			setMessages((prev) => [
+				...prev,
+				{ role: "bot", text: "❌ Tolong ulangi pertanyaanmu!" },
+			]);
+		} finally {
+			setLoading(false);
+		}
+	};
 
 	return (
 		<div className="flex flex-col h-screen bg-gray-50">
@@ -109,12 +112,12 @@ export default function ChatPage() {
 					type="text"
 					value={input}
 					onChange={(e) => setInput(e.target.value)}
-					onKeyDown={(e) => e.key === "Enter" && handleSend()}
+					onKeyDown={(e) => e.key === "Enter" && handleSend(null)}
 					className="flex-1 border border-blue-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200 ease-in-out"
 					placeholder="Tulis pesanmu..."
 				/>
 				<button
-					onClick={handleSend}
+					onClick={() => handleSend(null)}
 					className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all duration-200 ease-in-out flex items-center justify-center"
 					disabled={loading}
 				>
