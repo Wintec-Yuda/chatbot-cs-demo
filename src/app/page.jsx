@@ -342,34 +342,42 @@ export default function ChatPage() {
 				initial={{ y: -20, opacity: 0 }}
 				animate={{ y: 0, opacity: 1 }}
 				transition={{ duration: 0.5 }}
-				className={`px-6 py-4 shadow-lg ${
+				className={`px-4 sm:px-6 py-3 sm:py-4 shadow-lg ${
 					darkMode
 						? "bg-gradient-to-r from-blue-800 to-indigo-800"
 						: "bg-gradient-to-r from-blue-600 to-indigo-600"
 				}`}
 			>
-				<div className="max-w-4xl mx-auto flex justify-between items-center">
-					<div className="flex items-center space-x-3">
-						<motion.div
-							animate={{ rotate: 360 }}
-							transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
-							className={`w-8 h-8 rounded-full flex items-center justify-center ${
-								darkMode ? "bg-white/10" : "bg-white/20"
-							}`}
-						>
-							<div
-								className={`w-6 h-6 rounded-full ${
-									darkMode ? "bg-white/20" : "bg-white/30"
+				<div className="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2 sm:gap-0">
+					<div className="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+						<div className="flex items-center space-x-3">
+							<motion.div
+								animate={{ rotate: 360 }}
+								transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+								className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center ${
+									darkMode ? "bg-white/10" : "bg-white/20"
 								}`}
-							/>
-						</motion.div>
-						<h1 className="text-xl font-bold tracking-tight text-white">
-							Alamasta
-						</h1>
+							>
+								<div
+									className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full ${
+										darkMode ? "bg-white/20" : "bg-white/30"
+									}`}
+								/>
+							</motion.div>
+							<h1 className="text-lg sm:text-xl font-bold tracking-tight text-white">
+								Alamasta
+							</h1>
+						</div>
+						<div className="flex sm:hidden items-center gap-2">
+							<LanguageToggle />
+							<DarkModeToggle />
+						</div>
 					</div>
-					<div className="flex items-center gap-3">
-						<LanguageToggle />
-						<DarkModeToggle />
+					<div className="flex items-center gap-3 w-full sm:w-auto justify-between sm:justify-start">
+						<div className="hidden sm:flex items-center gap-3">
+							<LanguageToggle />
+							<DarkModeToggle />
+						</div>
 						<ResetChatButton />
 					</div>
 				</div>
