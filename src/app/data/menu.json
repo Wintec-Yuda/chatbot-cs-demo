@@ -1,352 +1,428 @@
-[
-	{
-		"id": 1,
-		"name": "Nasi Kucing",
-		"category": "makanan",
-		"price": 5000,
-		"composition": "Nasi putih, sambal teri, daun pisang"
-	},
-	{
-		"id": 2,
-		"name": "Sate Usus",
-		"category": "makanan",
-		"price": 3000,
-		"composition": "Usus ayam, kecap manis, bawang putih, tusuk sate"
-	},
-	{
-		"id": 3,
-		"name": "Gorengan Tempe",
-		"category": "makanan",
-		"price": 2000,
-		"composition": "Tempe, tepung terigu, bawang putih, garam"
-	},
-	{
-		"id": 4,
-		"name": "Bakmi Jawa",
-		"category": "makanan",
-		"price": 12000,
-		"composition": "Mie kuning, telur, kol, bawang putih, kaldu ayam"
-	},
-	{
-		"id": 5,
-		"name": "Tahu Bacem",
-		"category": "makanan",
-		"price": 2500,
-		"composition": "Tahu, gula merah, lengkuas, daun salam, kecap manis"
-	},
-	{
-		"id": 6,
-		"name": "Sate Telur Puyuh",
-		"category": "makanan",
-		"price": 4000,
-		"composition": "Telur puyuh rebus, kecap manis, bawang putih"
-	},
-	{
-		"id": 7,
-		"name": "Orek Tempe",
-		"category": "makanan",
-		"price": 5000,
-		"composition": "Tempe, kecap manis, cabai merah, daun salam"
-	},
-	{
-		"id": 8,
-		"name": "Sego Pecel",
-		"category": "makanan",
-		"price": 10000,
-		"composition": "Nasi putih, sayuran rebus, sambal kacang"
-	},
-	{
-		"id": 9,
-		"name": "Ayam Goreng",
-		"category": "makanan",
-		"price": 15000,
-		"composition": "Ayam, bawang putih, ketumbar, garam"
-	},
-	{
-		"id": 10,
-		"name": "Bakwan Sayur",
-		"category": "makanan",
-		"price": 2000,
-		"composition": "Wortel, kol, tepung terigu, daun bawang"
-	},
-	{
-		"id": 11,
-		"name": "Wedang Jahe",
-		"category": "minuman",
-		"price": 7000,
-		"composition": "Jahe, gula merah, air panas, serai"
-	},
-	{
-		"id": 12,
-		"name": "Es Teh Manis",
-		"category": "minuman",
-		"price": 5000,
-		"composition": "Teh celup, gula pasir, air, es batu"
-	},
-	{
-		"id": 13,
-		"name": "Kopi Tubruk",
-		"category": "minuman",
-		"price": 8000,
-		"composition": "Bubuk kopi, gula, air panas"
-	},
-	{
-		"id": 14,
-		"name": "Es Jeruk",
-		"category": "minuman",
-		"price": 6000,
-		"composition": "Jeruk peras, gula, air, es batu"
-	},
-	{
-		"id": 15,
-		"name": "Teh Panas",
-		"category": "minuman",
-		"price": 4000,
-		"composition": "Teh celup, gula pasir, air panas"
-	},
-	{
-		"id": 16,
-		"name": "Mie Ayam",
-		"category": "makanan",
-		"price": 15000,
-		"composition": "Mie kuning, ayam, sawi, jamur, kaldu ayam"
-	},
-	{
-		"id": 17,
-		"name": "Nasi Campur",
-		"category": "makanan",
-		"price": 13000,
-		"composition": "Nasi, ayam, sambal, sayur, telur"
-	},
-	{
-		"id": 18,
-		"name": "Es Kelapa Muda",
-		"category": "minuman",
-		"price": 9000,
-		"composition": "Kelapa muda, air kelapa, es batu"
-	},
-	{
-		"id": 19,
-		"name": "Smoothie Mangga",
-		"category": "minuman",
-		"price": 12000,
-		"composition": "Mangga, susu, es batu"
-	},
-	{
-		"id": 20,
-		"name": "Roti Bakar Cokelat Keju",
-		"category": "camilan",
-		"price": 8000,
-		"composition": "Roti, cokelat, keju"
-	},
-	{
-		"id": 21,
-		"name": "Pisang Goreng",
-		"category": "camilan",
-		"price": 4000,
-		"composition": "Pisang, tepung terigu, minyak"
-	},
-	{
-		"id": 22,
-		"name": "Sup Ayam",
-		"category": "makanan",
-		"price": 12000,
-		"composition": "Ayam, wortel, kentang, kaldu ayam"
-	},
-	{
-		"id": 23,
-		"name": "Tahu Tempe Mendoan",
-		"category": "camilan",
-		"price": 6000,
-		"composition": "Tahu, tempe, tepung terigu, daun bawang"
-	},
-	{
-		"id": 24,
-		"name": "Kue Cubir",
-		"category": "camilan",
-		"price": 3500,
-		"composition": "Tepung terigu, gula merah, kelapa parut"
-	},
-	{
-		"id": 25,
-		"name": "Nasi Goreng Special",
-		"category": "makanan",
-		"price": 18000,
-		"composition": "Nasi, ayam, udang, telur, sayuran"
-	},
-	{
-		"id": 26,
-		"name": "Es Campur",
-		"category": "minuman",
-		"price": 10000,
-		"composition": "Kelapa muda, nata de coco, alpukat, sirup, es batu"
-	},
-	{
-		"id": 27,
-		"name": "Lumpia Semarang",
-		"category": "camilan",
-		"price": 7000,
-		"composition": "Kulit lumpia, rebung, daging ayam, bumbu rempah"
-	},
-	{
-		"id": 28,
-		"name": "Soto Ayam",
-		"category": "makanan",
-		"price": 14000,
-		"composition": "Ayam, kunyit, santan, soun, daun bawang"
-	},
-	{
-		"id": 29,
-		"name": "Klepon",
-		"category": "camilan",
-		"price": 3000,
-		"composition": "Tepung ketan, gula merah, kelapa parut"
-	},
-	{
-		"id": 30,
-		"name": "Es Dawet",
-		"category": "minuman",
-		"price": 8000,
-		"composition": "Cendol, santan, gula merah, es batu"
-	},
-	{
-		"id": 31,
-		"name": "Gado-Gado",
-		"category": "makanan",
-		"price": 12000,
-		"composition": "Sayuran rebus, telur, tahu, tempe, sambal kacang"
-	},
-	{
-		"id": 32,
-		"name": "Martabak Manis",
-		"category": "camilan",
-		"price": 15000,
-		"composition": "Tepung terigu, gula, susu kental manis, margarin"
-	},
-	{
-		"id": 33,
-		"name": "Rawon",
-		"category": "makanan",
-		"price": 17000,
-		"composition": "Daging sapi, keluak, daun bawang, tauge"
-	},
-	{
-		"id": 34,
-		"name": "Es Cincau",
-		"category": "minuman",
-		"price": 6000,
-		"composition": "Cincau hitam, santan, gula merah, es batu"
-	},
-	{
-		"id": 35,
-		"name": "Serabi",
-		"category": "camilan",
-		"price": 5000,
-		"composition": "Tepung beras, santan, gula merah"
-	},
-	{
-		"id": 36,
-		"name": "Bubur Ayam",
-		"category": "makanan",
-		"price": 10000,
-		"composition": "Bubur nasi, ayam suwir, kecap, kerupuk"
-	},
-	{
-		"id": 37,
-		"name": "Kue Lapis",
-		"category": "camilan",
-		"price": 4000,
-		"composition": "Tepung beras, santan, gula, pewarna makanan"
-	},
-	{
-		"id": 38,
-		"name": "Sop Buntut",
-		"category": "makanan",
-		"price": 25000,
-		"composition": "Buntut sapi, wortel, kentang, tomat, daun bawang"
-	},
-	{
-		"id": 39,
-		"name": "Es Teler",
-		"category": "minuman",
-		"price": 12000,
-		"composition": "Alpukat, kelapa muda, nangka, susu, es batu"
-	},
-	{
-		"id": 40,
-		"name": "Pempek",
-		"category": "makanan",
-		"price": 15000,
-		"composition": "Ikan, tepung sagu, cuko, timun"
-	},
-	{
-		"id": 41,
-		"name": "Kue Putu",
-		"category": "camilan",
-		"price": 3000,
-		"composition": "Tepung beras, gula merah, kelapa parut"
-	},
-	{
-		"id": 42,
-		"name": "Es Kopyor",
-		"category": "minuman",
-		"price": 11000,
-		"composition": "Kelapa kopyor, nata de coco, sirup, es batu"
-	},
-	{
-		"id": 43,
-		"name": "Rendang",
-		"category": "makanan",
-		"price": 20000,
-		"composition": "Daging sapi, santan, bumbu rempah, kelapa"
-	},
-	{
-		"id": 44,
-		"name": "Cendol",
-		"category": "minuman",
-		"price": 7000,
-		"composition": "Tepung beras, gula merah, santan, es batu"
-	},
-	{
-		"id": 45,
-		"name": "Kerak Telor",
-		"category": "camilan",
-		"price": 10000,
-		"composition": "Beras ketan, telur, ebi, kelapa parut"
-	},
-	{
-		"id": 46,
-		"name": "Sate Maranggi",
-		"category": "makanan",
-		"price": 20000,
-		"composition": "Daging sapi, kecap manis, bawang merah, ketumbar"
-	},
-	{
-		"id": 47,
-		"name": "Es Selendang Mayang",
-		"category": "minuman",
-		"price": 9000,
-		"composition": "Tepung hunkwe, santan, gula merah, es batu"
-	},
-	{
-		"id": 48,
-		"name": "Lemper",
-		"category": "camilan",
-		"price": 5000,
-		"composition": "Ketepung ketan, ayam suwir, daun pisang"
-	},
-	{
-		"id": 49,
-		"name": "Soto Betawi",
-		"category": "makanan",
-		"price": 18000,
-		"composition": "Daging sapi, santan, susu, kentang, tomat"
-	},
-	{
-		"id": 50,
-		"name": "Es Bir",
-		"category": "minuman",
-		"price": 8000,
-		"composition": "Jahe, kayu manis, gula merah, es batu"
-	}
-]
+{
+	"menu": [
+		{
+			"id": 1,
+			"name": "Lumpia Semarang",
+			"category": "Appetizers",
+			"price": 7000,
+			"description": "Kulit lumpia renyah dengan isian rebung dan daging ayam",
+			"composition": ["Kulit lumpia", "rebung", "daging ayam", "bumbu rempah"]
+		},
+		{
+			"id": 2,
+			"name": "Tahu Tempe Mendoan",
+			"category": "Appetizers",
+			"price": 6000,
+			"description": "Tahu dan tempe goreng tepung dengan tekstur renyah",
+			"composition": ["Tahu", "tempe", "tepung terigu", "daun bawang"]
+		},
+		{
+			"id": 3,
+			"name": "Pisang Goreng",
+			"category": "Appetizers",
+			"price": 4000,
+			"description": "Pisang raja digoreng dengan lapisan tepung crispy",
+			"composition": ["Pisang raja", "tepung terigu", "minyak goreng"]
+		},
+		{
+			"id": 4,
+			"name": "Kerak Telor",
+			"category": "Appetizers",
+			"price": 10000,
+			"description": "Omelet khas Betawi dengan beras ketan dan kelapa",
+			"composition": ["Beras ketan", "telur", "ebi", "kelapa parut"]
+		},
+		{
+			"id": 5,
+			"name": "Klepon",
+			"category": "Appetizers",
+			"price": 3000,
+			"description": "Kue tradisional dengan isi gula merah yang meleleh",
+			"composition": ["Tepung ketan", "gula merah", "kelapa parut"]
+		},
+		{
+			"id": 6,
+			"name": "Nasi Goreng Special",
+			"category": "Main Courses",
+			"price": 18000,
+			"description": "Nasi goreng dengan campuran daging dan seafood",
+			"composition": ["Nasi", "ayam", "udang", "telur", "sayuran"]
+		},
+		{
+			"id": 7,
+			"name": "Ayam Goreng Kremes",
+			"category": "Main Courses",
+			"price": 15000,
+			"description": "Ayam goreng dengan taburan kremes renyah",
+			"composition": ["Ayam", "bawang putih", "ketumbar", "tepung"]
+		},
+		{
+			"id": 8,
+			"name": "Soto Ayam",
+			"category": "Main Courses",
+			"price": 14000,
+			"description": "Soto ayam kuning dengan kuah gurih",
+			"composition": ["Ayam", "kunyit", "santan", "soun", "daun bawang"]
+		},
+		{
+			"id": 9,
+			"name": "Rawon",
+			"category": "Main Courses",
+			"price": 17000,
+			"description": "Sup daging sapi hitam khas Jawa Timur",
+			"composition": ["Daging sapi", "keluak", "daun bawang", "tauge"]
+		},
+		{
+			"id": 10,
+			"name": "Rendang",
+			"category": "Main Courses",
+			"price": 20000,
+			"description": "Daging sapi dimasak dengan bumbu rempah hingga empuk",
+			"composition": ["Daging sapi", "santan", "bumbu rempah", "kelapa"]
+		},
+		{
+			"id": 11,
+			"name": "Sate Maranggi",
+			"category": "Main Courses",
+			"price": 20000,
+			"description": "Sate daging sapi khas Purwakarta dengan bumbu khusus",
+			"composition": ["Daging sapi", "kecap manis", "bawang merah", "ketumbar"]
+		},
+		{
+			"id": 12,
+			"name": "Sop Buntut",
+			"category": "Main Courses",
+			"price": 25000,
+			"description": "Sup buntut sapi dengan sayuran segar",
+			"composition": [
+				"Buntut sapi",
+				"wortel",
+				"kentang",
+				"tomat",
+				"daun bawang"
+			]
+		},
+		{
+			"id": 13,
+			"name": "Gado-Gado",
+			"category": "Main Courses",
+			"price": 12000,
+			"description": "Salad sayur dengan saus kacang khas Indonesia",
+			"composition": [
+				"Sayuran rebus",
+				"telur",
+				"tahu",
+				"tempe",
+				"sambal kacang"
+			]
+		},
+		{
+			"id": 14,
+			"name": "Bubur Ayam",
+			"category": "Main Courses",
+			"price": 10000,
+			"description": "Bubur nasi dengan topping ayam suwir",
+			"composition": ["Bubur nasi", "ayam suwir", "kecap", "kerupuk"]
+		},
+		{
+			"id": 15,
+			"name": "Martabak Manis",
+			"category": "Desserts",
+			"price": 15000,
+			"description": "Kue dadar tebal dengan topping manis",
+			"composition": ["Tepung terigu", "gula", "susu kental manis", "margarin"]
+		},
+		{
+			"id": 16,
+			"name": "Serabi",
+			"category": "Desserts",
+			"price": 5000,
+			"description": "Panekuk tradisional dengan kuah kinca",
+			"composition": ["Tepung beras", "santan", "gula merah"]
+		},
+		{
+			"id": 17,
+			"name": "Kue Lapis",
+			"category": "Desserts",
+			"price": 4000,
+			"description": "Kue berlapis dengan warna-warni menarik",
+			"composition": ["Tepung beras", "santan", "gula", "pewarna makanan"]
+		},
+		{
+			"id": 18,
+			"name": "Kue Putu",
+			"category": "Desserts",
+			"price": 3000,
+			"description": "Kue tradisional berbentuk tabung dengan isi gula merah",
+			"composition": ["Tepung beras", "gula merah", "kelapa parut"]
+		},
+		{
+			"id": 19,
+			"name": "Roti Bakar Cokelat Keju",
+			"category": "Desserts",
+			"price": 8000,
+			"description": "Roti panggang dengan topping cokelat dan keju",
+			"composition": ["Roti tawar", "cokelat", "keju"]
+		},
+		{
+			"id": 20,
+			"name": "Wedang Jahe",
+			"category": "Beverages",
+			"price": 7000,
+			"description": "Minuman jahe hangat dengan gula merah",
+			"composition": ["Jahe", "gula merah", "air panas", "serai"]
+		},
+		{
+			"id": 21,
+			"name": "Es Teh Manis",
+			"category": "Beverages",
+			"price": 5000,
+			"description": "Teh manis dingin dengan es batu",
+			"composition": ["Teh celup", "gula pasir", "air", "es batu"]
+		},
+		{
+			"id": 22,
+			"name": "Es Jeruk",
+			"category": "Beverages",
+			"price": 6000,
+			"description": "Jus jeruk segar dengan es batu",
+			"composition": ["Jeruk peras", "gula", "air", "es batu"]
+		},
+		{
+			"id": 23,
+			"name": "Es Kelapa Muda",
+			"category": "Beverages",
+			"price": 9000,
+			"description": "Air kelapa muda asli dengan daging kelapa",
+			"composition": ["Kelapa muda", "air kelapa", "es batu"]
+		},
+		{
+			"id": 24,
+			"name": "Es Campur",
+			"category": "Beverages",
+			"price": 10000,
+			"description": "Campuran buah dan jelly dengan sirup dan es",
+			"composition": [
+				"Kelapa muda",
+				"nata de coco",
+				"alpukat",
+				"sirup",
+				"es batu"
+			]
+		},
+		{
+			"id": 25,
+			"name": "Es Dawet",
+			"category": "Beverages",
+			"price": 8000,
+			"description": "Minuman tradisional dengan cendol dan santan",
+			"composition": ["Cendol", "santan", "gula merah", "es batu"]
+		},
+		{
+			"id": 26,
+			"name": "Es Teler",
+			"category": "Beverages",
+			"price": 12000,
+			"description": "Es campur dengan buah-buahan dan susu",
+			"composition": ["Alpukat", "kelapa muda", "nangka", "susu", "es batu"]
+		},
+		{
+			"id": 27,
+			"name": "Es Kopyor",
+			"category": "Beverages",
+			"price": 11000,
+			"description": "Es dengan kelapa kopyor dan nata de coco",
+			"composition": ["Kelapa kopyor", "nata de coco", "sirup", "es batu"]
+		},
+		{
+			"id": 28,
+			"name": "Es Bir",
+			"category": "Beverages",
+			"price": 8000,
+			"description": "Minuman jahe dingin dengan kayu manis",
+			"composition": ["Jahe", "kayu manis", "gula merah", "es batu"]
+		},
+		{
+			"id": 29,
+			"name": "Nasi Kucing",
+			"category": "Signature Dishes",
+			"price": 5000,
+			"description": "Nasi kecil dengan sambal teri khas Jogja",
+			"composition": ["Nasi putih", "sambal teri", "daun pisang"]
+		},
+		{
+			"id": 30,
+			"name": "Sate Usus",
+			"category": "Signature Dishes",
+			"price": 3000,
+			"description": "Sate usus ayam dengan bumbu kecap",
+			"composition": ["Usus ayam", "kecap manis", "bawang putih", "tusuk sate"]
+		},
+		{
+			"id": 31,
+			"name": "Tahu Bacem",
+			"category": "Signature Dishes",
+			"price": 2500,
+			"description": "Tahu bumbu gula merah khas Jawa",
+			"composition": [
+				"Tahu",
+				"gula merah",
+				"lengkuas",
+				"daun salam",
+				"kecap manis"
+			]
+		},
+		{
+			"id": 32,
+			"name": "Sate Telur Puyuh",
+			"category": "Signature Dishes",
+			"price": 4000,
+			"description": "Sate telur puyuh dengan bumbu kecap",
+			"composition": ["Telur puyuh rebus", "kecap manis", "bawang putih"]
+		},
+		{
+			"id": 33,
+			"name": "Pempek",
+			"category": "Signature Dishes",
+			"price": 15000,
+			"description": "Makanan khas Palembang dengan kuah cuko",
+			"composition": ["Ikan", "tepung sagu", "cuko", "timun"]
+		},
+		{
+			"id": 34,
+			"name": "Bakmi Jawa",
+			"category": "Main Courses",
+			"price": 12000,
+			"description": "Mi kuning dengan bumbu khas Jawa",
+			"composition": ["Mi kuning", "telur", "kol", "bawang putih", "kaldu ayam"]
+		},
+		{
+			"id": 35,
+			"name": "Orek Tempe",
+			"category": "Main Courses",
+			"price": 5000,
+			"description": "Tempe orek dengan rasa manis pedas",
+			"composition": ["Tempe", "kecap manis", "cabai merah", "daun salam"]
+		},
+		{
+			"id": 36,
+			"name": "Sego Pecel",
+			"category": "Main Courses",
+			"price": 10000,
+			"description": "Nasi dengan sayuran dan sambal kacang",
+			"composition": ["Nasi putih", "sayuran rebus", "sambal kacang"]
+		},
+		{
+			"id": 37,
+			"name": "Bakwan Sayur",
+			"category": "Appetizers",
+			"price": 2000,
+			"description": "Gorengan sayur dengan tepung renyah",
+			"composition": ["Wortel", "kol", "tepung terigu", "daun bawang"]
+		},
+		{
+			"id": 38,
+			"name": "Kopi Tubruk",
+			"category": "Beverages",
+			"price": 8000,
+			"description": "Kopi tradisional diseduh langsung dengan bubuk kopi",
+			"composition": ["Bubuk kopi", "gula", "air panas"]
+		},
+		{
+			"id": 39,
+			"name": "Teh Panas",
+			"category": "Beverages",
+			"price": 4000,
+			"description": "Teh hangat dengan gula pasir",
+			"composition": ["Teh celup", "gula pasir", "air panas"]
+		},
+		{
+			"id": 40,
+			"name": "Mie Ayam",
+			"category": "Main Courses",
+			"price": 15000,
+			"description": "Mi ayam dengan topping jamur dan pangsit",
+			"composition": ["Mi kuning", "ayam", "sawi", "jamur", "kaldu ayam"]
+		},
+		{
+			"id": 41,
+			"name": "Nasi Campur",
+			"category": "Main Courses",
+			"price": 13000,
+			"description": "Nasi dengan berbagai lauk pilihan",
+			"composition": ["Nasi", "ayam", "sambal", "sayur", "telur"]
+		},
+		{
+			"id": 42,
+			"name": "Smoothie Mangga",
+			"category": "Beverages",
+			"price": 12000,
+			"description": "Smoothie mangga segar dengan susu",
+			"composition": ["Mangga", "susu", "es batu"]
+		},
+		{
+			"id": 43,
+			"name": "Sup Ayam",
+			"category": "Main Courses",
+			"price": 12000,
+			"description": "Sup ayam dengan sayuran segar",
+			"composition": ["Ayam", "wortel", "kentang", "kaldu ayam"]
+		},
+		{
+			"id": 44,
+			"name": "Kue Cubit",
+			"category": "Desserts",
+			"price": 3500,
+			"description": "Kue kecil dengan topping keju atau cokelat",
+			"composition": ["Tepung terigu", "gula merah", "kelapa parut"]
+		},
+		{
+			"id": 45,
+			"name": "Soto Betawi",
+			"category": "Main Courses",
+			"price": 18000,
+			"description": "Soto daging sapi dengan kuah santan",
+			"composition": ["Daging sapi", "santan", "susu", "kentang", "tomat"]
+		},
+		{
+			"id": 46,
+			"name": "Es Cincau",
+			"category": "Beverages",
+			"price": 6000,
+			"description": "Minuman cincau hitam dengan santan",
+			"composition": ["Cincau hitam", "santan", "gula merah", "es batu"]
+		},
+		{
+			"id": 47,
+			"name": "Lemper",
+			"category": "Appetizers",
+			"price": 5000,
+			"description": "Ketupat ketan dengan isi ayam suwir",
+			"composition": ["Tepung ketan", "ayam suwir", "daun pisang"]
+		},
+		{
+			"id": 48,
+			"name": "Es Selendang Mayang",
+			"category": "Beverages",
+			"price": 9000,
+			"description": "Minuman tradisional dengan tepung hunkwe",
+			"composition": ["Tepung hunkwe", "santan", "gula merah", "es batu"]
+		},
+		{
+			"id": 49,
+			"name": "Cendol",
+			"category": "Beverages",
+			"price": 7000,
+			"description": "Minuman cendol dengan gula merah dan santan",
+			"composition": ["Tepung beras", "gula merah", "santan", "es batu"]
+		},
+		{
+			"id": 50,
+			"name": "Gorengan Tempe",
+			"category": "Appetizers",
+			"price": 2000,
+			"description": "Tempe goreng tepung sederhana",
+			"composition": ["Tempe", "tepung terigu", "bawang putih", "garam"]
+		}
+	]
+}

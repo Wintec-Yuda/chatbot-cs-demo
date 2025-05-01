@@ -1,13 +1,18 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { generate } from "./lib/gemini";
-import { buildPromptMenu } from "./lib/gemini";
+import { buildPromptMenuId, buildPromptMenuEn } from "./lib/gemini";
 import menu from "./data/menu.json";
 import { motion, AnimatePresence } from "framer-motion";
 import MarkdownPreview from "@uiw/react-markdown-preview";
 import { toast } from "react-toastify";
-import { FiSend, FiRefreshCw, FiSun, FiMoon } from "react-icons/fi";
+import { FiSend, FiRefreshCw, FiSun, FiMoon, FiGlobe } from "react-icons/fi";
+
+// Constants
+const MAX_MESSAGE_LENGTH = 100;
+const MAX_MESSAGES = 50;
+const MAX_HISTORY_LENGTH = 5; // Number of previous messages to include in context
 
 export default function ChatPage() {
 	const [messages, setMessages] = useState([]);
@@ -15,108 +20,314 @@ export default function ChatPage() {
 	const [loading, setLoading] = useState(false);
 	const [hasInitialized, setHasInitialized] = useState(false);
 	const [darkMode, setDarkMode] = useState(false);
-
+	const [isInitializing, setIsInitializing] = useState(true);
+	const [language, setLanguage] = useState("id"); // 'id' or 'en'
 	const messagesEndRef = useRef(null);
 
+	// Initialize dark mode and language from localStorage
 	useEffect(() => {
 		const savedMode = localStorage.getItem("darkMode");
+		const savedLang = localStorage.getItem("language");
+
 		if (savedMode !== null) {
 			setDarkMode(savedMode === "true");
 		} else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
 			setDarkMode(true);
 		}
+
+		if (savedLang && ["id", "en"].includes(savedLang)) {
+			setLanguage(savedLang);
+		}
+
+		setIsInitializing(false);
 	}, []);
 
+	// Apply dark mode class to document
 	useEffect(() => {
-		if (darkMode) {
-			document.documentElement.classList.add("dark");
-		} else {
-			document.documentElement.classList.remove("dark");
-		}
+		document.documentElement.classList.toggle("dark", darkMode);
 		localStorage.setItem("darkMode", darkMode);
 	}, [darkMode]);
 
+	// Save language preference
+	useEffect(() => {
+		localStorage.setItem("language", language);
+	}, [language]);
+
+	// Scroll to bottom when messages change
 	useEffect(() => {
 		scrollToBottom();
 	}, [messages]);
 
+	// Initialize with welcome message if empty
 	useEffect(() => {
-		if (!hasInitialized && messages.length === 0) {
-			handleSend("Ada apa saja menu disini?");
+		if (!hasInitialized && messages.length === 0 && !isInitializing) {
+			console.log("language", language);
+
+			const welcomeMessage =
+				language === "id"
+					? "Ada apa saja menu disini?"
+					: "What menus are available here?";
+			console.log("Initializing with welcome message:", welcomeMessage);
+
+			handleSend(welcomeMessage);
 			setHasInitialized(true);
 		}
-	}, [hasInitialized]);
+	}, [hasInitialized, messages.length, language, isInitializing]);
 
-	const toggleDarkMode = () => {
-		setDarkMode(!darkMode);
+	const resetChat = () => {
+		setMessages([]);
+		setHasInitialized(false);
+		toast.success(
+			language === "id"
+				? "Percakapan baru telah dimulai"
+				: "New conversation started"
+		);
+	};
+
+	const toggleDarkMode = () => setDarkMode(!darkMode);
+	const toggleLanguage = () => {
+		const newLanguage = language === "id" ? "en" : "id";
+		setLanguage(newLanguage);
+		localStorage.setItem("language", newLanguage);
+		resetChat();
 	};
 
 	const scrollToBottom = () => {
 		messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
 	};
 
-	const handleSend = async (initialInput) => {
-		const messageText = (initialInput ?? input).trim();
-
-		if (!messageText) {
-			toast.error("Tolong masukkan pertanyaan terlebih dahulu!");
-			return;
+	const validateInput = (text) => {
+		if (!text.trim()) {
+			toast.error(
+				language === "id"
+					? "Tolong masukkan pertanyaan terlebih dahulu!"
+					: "Please enter your question first!"
+			);
+			return false;
 		}
 
-		if (messageText.length > 100) {
-			toast.error("Pesan terlalu panjang. Maksimal 100 karakter!");
-			return;
+		if (text.length > MAX_MESSAGE_LENGTH) {
+			toast.error(
+				language === "id"
+					? `Pesan terlalu panjang. Maksimal ${MAX_MESSAGE_LENGTH} karakter!`
+					: `Message too long. Maximum ${MAX_MESSAGE_LENGTH} characters!`
+			);
+			return false;
 		}
 
 		const dangerousPattern =
 			/<script[\s\S]*?>[\s\S]*?<\/script>|javascript:|on\w+="[^"]*"/gi;
-		if (dangerousPattern.test(messageText)) {
-			toast.error("Terdeteksi karakter tidak aman dalam pesan!");
-			return;
+		if (dangerousPattern.test(text)) {
+			toast.error(
+				language === "id"
+					? "Terdeteksi karakter tidak aman dalam pesan!"
+					: "Detected unsafe characters in message!"
+			);
+			return false;
 		}
 
-		if (messages.length >= 50) {
-			toast.error("Batas pesan tercapai. Silakan mulai ulang percakapan.");
-			return;
+		if (messages.length >= MAX_MESSAGES) {
+			toast.error(
+				language === "id"
+					? "Batas pesan tercapai. Silakan mulai ulang percakapan."
+					: "Message limit reached. Please start a new conversation."
+			);
+			return false;
 		}
 
-		const userMessage = {
-			role: "user",
-			text: messageText,
-			id: crypto.randomUUID(),
-		};
-		setMessages((prev) => [...prev, userMessage]);
-		setInput("");
-		setLoading(true);
+		return true;
+	};
 
-		try {
-			const prompt = buildPromptMenu(menu, messageText);
-			const botReply = await generate(prompt);
-			const botMessage = {
-				role: "bot",
-				text: botReply,
+	const handleSend = useCallback(
+		async (initialInput) => {
+			const messageText = (initialInput ?? input).trim();
+			if (!validateInput(messageText)) return;
+
+			const userMessage = {
+				role: "user",
+				text: messageText,
 				id: crypto.randomUUID(),
+				timestamp: new Date().toISOString(),
 			};
-			setMessages((prev) => [...prev, botMessage]);
-		} catch (error) {
-			console.log(error);
-			setMessages((prev) => [
-				...prev,
-				{
+
+			setMessages((prev) => [...prev, userMessage]);
+			setInput("");
+			setLoading(true);
+
+			try {
+				// Get recent messages for context (excluding current message)
+				const recentHistory = messages.slice(-MAX_HISTORY_LENGTH);
+				const prompt =
+					language === "id"
+						? buildPromptMenuId(menu, messageText, recentHistory)
+						: buildPromptMenuEn(menu, messageText, recentHistory);
+				const botReply = await generate(prompt);
+
+				const botMessage = {
 					role: "bot",
-					text: "❌ Terjadi kesalahan. Coba lagi ya!",
-					id: Date.now() + 1,
-				},
-			]);
-		} finally {
-			setLoading(false);
+					text: botReply,
+					id: crypto.randomUUID(),
+					timestamp: new Date().toISOString(),
+				};
+
+				setMessages((prev) => [...prev, botMessage]);
+			} catch (error) {
+				console.error("Chat error:", error);
+				setMessages((prev) => [
+					...prev,
+					{
+						role: "bot",
+						text:
+							language === "id"
+								? "❌ Terjadi kesalahan. Coba lagi ya!"
+								: "❌ An error occurred. Please try again!",
+						id: crypto.randomUUID(),
+						timestamp: new Date().toISOString(),
+					},
+				]);
+			} finally {
+				setLoading(false);
+			}
+		},
+		[input, messages, language]
+	);
+
+	const handleKeyDown = (e) => {
+		if (e.key === "Enter" && !e.shiftKey) {
+			e.preventDefault();
+			handleSend();
 		}
 	};
 
-	const resetChat = () => {
-		setMessages([]);
-		setHasInitialized(false);
-	};
+	// UI Components
+	const DarkModeToggle = () => (
+		<motion.button
+			whileHover={{ scale: 1.05 }}
+			whileTap={{ scale: 0.95 }}
+			onClick={toggleDarkMode}
+			className={`p-2 rounded-full cursor-pointer ${
+				darkMode ? "bg-indigo-700 text-yellow-200" : "bg-blue-100 text-blue-700"
+			}`}
+			aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+		>
+			{darkMode ? (
+				<FiSun className="w-5 h-5" />
+			) : (
+				<FiMoon className="w-5 h-5" />
+			)}
+		</motion.button>
+	);
+
+	const LanguageToggle = () => (
+		<motion.button
+			whileHover={{ scale: 1.05 }}
+			whileTap={{ scale: 0.95 }}
+			onClick={toggleLanguage}
+			className={`p-2 rounded-full cursor-pointer ${
+				darkMode ? "bg-indigo-700 text-white" : "bg-blue-100 text-blue-700"
+			}`}
+			aria-label={
+				language === "id" ? "Switch to English" : "Ganti ke Bahasa Indonesia"
+			}
+		>
+			<div className="flex items-center gap-1">
+				<FiGlobe className="w-5 h-5" />
+				<span className="text-xs font-medium">
+					{language === "id" ? "EN" : "ID"}
+				</span>
+			</div>
+		</motion.button>
+	);
+
+	const ResetChatButton = () => (
+		<motion.button
+			whileHover={{ scale: 1.05 }}
+			whileTap={{ scale: 0.95 }}
+			onClick={resetChat}
+			className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm text-white cursor-pointer ${
+				darkMode
+					? "bg-white/10 hover:bg-white/20"
+					: "bg-white/20 hover:bg-white/30"
+			}`}
+		>
+			<FiRefreshCw className="w-4 h-4" />
+			<span>{language === "id" ? "Percakapan Baru" : "New Chat"}</span>
+		</motion.button>
+	);
+
+	const SendButton = () => (
+		<motion.button
+			whileHover={{ scale: 1.05 }}
+			whileTap={{ scale: 0.95 }}
+			onClick={() => handleSend()}
+			disabled={loading || !input.trim()}
+			className={`p-3 rounded-full shadow-lg transition-all duration-300 ${
+				loading || !input.trim()
+					? darkMode
+						? "bg-gray-600 text-gray-400 cursor-not-allowed"
+						: "bg-gray-300 text-gray-500 cursor-not-allowed"
+					: `text-white ${
+							darkMode
+								? "bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 shadow-blue-700/30"
+								: "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 shadow-blue-500/30"
+					  }`
+			}`}
+			aria-label="Send message"
+		>
+			{loading ? (
+				<FiRefreshCw className="w-5 h-5 animate-spin opacity-90" />
+			) : (
+				<FiSend className="w-5 h-5 hover:opacity-90 cursor-pointer" />
+			)}
+		</motion.button>
+	);
+
+	const MessageBubble = ({ msg }) => (
+		<div
+			className={`max-w-[80%] rounded-2xl px-5 py-3 ${
+				msg.role === "user"
+					? `text-white rounded-br-none ${
+							darkMode
+								? "bg-gradient-to-r from-blue-700 to-indigo-700"
+								: "bg-gradient-to-r from-blue-500 to-indigo-500"
+					  }`
+					: `shadow-md rounded-bl-none ${
+							darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800"
+					  }`
+			}`}
+		>
+			{msg.role === "bot" ? (
+				<MarkdownPreview
+					source={msg.text}
+					style={{
+						background: "transparent",
+						color: "inherit",
+						fontFamily: "inherit",
+						fontSize: "inherit",
+					}}
+					className={`prose prose-sm max-w-none ${
+						darkMode ? "prose-invert" : ""
+					}`}
+				/>
+			) : (
+				<div className="whitespace-pre-wrap">{msg.text}</div>
+			)}
+		</div>
+	);
+
+	const LoadingIndicator = () => (
+		<div className="flex space-x-2">
+			{[0, 150, 300].map((delay) => (
+				<div
+					key={delay}
+					className={`w-2 h-2 rounded-full animate-bounce ${
+						darkMode ? "bg-blue-400" : "bg-blue-500"
+					}`}
+					style={{ animationDelay: `${delay}ms` }}
+				/>
+			))}
+		</div>
+	);
 
 	return (
 		<div
@@ -150,40 +361,16 @@ export default function ChatPage() {
 								className={`w-6 h-6 rounded-full ${
 									darkMode ? "bg-white/20" : "bg-white/30"
 								}`}
-							></div>
+							/>
 						</motion.div>
-						<h1 className="text-xl font-bold tracking-tight text-white">Food Assistant</h1>
+						<h1 className="text-xl font-bold tracking-tight text-white">
+							Alamasta
+						</h1>
 					</div>
 					<div className="flex items-center gap-3">
-						<motion.button
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
-							onClick={toggleDarkMode}
-							className={`p-2 rounded-full cursor-pointer ${
-								darkMode
-									? "bg-indigo-700 text-yellow-200"
-									: "bg-blue-100 text-blue-700"
-							}`}
-						>
-							{darkMode ? (
-								<FiSun className="w-5 h-5" />
-							) : (
-								<FiMoon className="w-5 h-5" />
-							)}
-						</motion.button>
-						<motion.button
-							whileHover={{ scale: 1.05 }}
-							whileTap={{ scale: 0.95 }}
-							onClick={resetChat}
-							className={`flex items-center gap-1 px-3 py-1.5 rounded-full text-sm text-white cursor-pointer ${
-								darkMode
-									? "bg-white/10 hover:bg-white/20"
-									: "bg-white/20 hover:bg-white/30"
-							}`}
-						>
-							<FiRefreshCw className="w-4 h-4" />
-							<span>New Chat</span>
-						</motion.button>
+						<LanguageToggle />
+						<DarkModeToggle />
+						<ResetChatButton />
 					</div>
 				</div>
 			</motion.header>
@@ -213,7 +400,7 @@ export default function ChatPage() {
 										className={`w-10 h-10 rounded-full ${
 											darkMode ? "bg-blue-700" : "bg-blue-300"
 										}`}
-									></div>
+									/>
 								</div>
 							</div>
 							<h2
@@ -221,21 +408,25 @@ export default function ChatPage() {
 									darkMode ? "text-gray-200" : "text-gray-700"
 								}`}
 							>
-								Ask about our menu
+								{language === "id"
+									? "Tanya tentang menu kami"
+									: "Ask about our menu"}
 							</h2>
 							<p
 								className={`max-w-md ${
 									darkMode ? "text-gray-400" : "text-gray-500"
 								}`}
 							>
-								I can help you find delicious food and drinks from our menu.
+								{language === "id"
+									? "Saya bisa membantu Anda menemukan makanan dan minuman lezat dari menu kami."
+									: "I can help you find delicious food and drinks from our menu."}
 							</p>
 						</motion.div>
 					)}
 
-					{messages.map((msg, i) => (
+					{messages.map((msg) => (
 						<motion.div
-							key={msg.id || i}
+							key={msg.id}
 							initial={{ opacity: 0, y: 20 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ duration: 0.3 }}
@@ -243,38 +434,7 @@ export default function ChatPage() {
 								msg.role === "user" ? "justify-end" : "justify-start"
 							}`}
 						>
-							<div
-								className={`max-w-[80%] rounded-2xl px-5 py-3 ${
-									msg.role === "user"
-										? `text-white rounded-br-none ${
-												darkMode
-													? "bg-gradient-to-r from-blue-700 to-indigo-700"
-													: "bg-gradient-to-r from-blue-500 to-indigo-500"
-										}`
-										: `shadow-md rounded-bl-none ${
-												darkMode
-													? "bg-gray-800 text-gray-100"
-													: "bg-white text-gray-800"
-										}`
-								}`}
-							>
-								{msg.role === "bot" ? (
-									<MarkdownPreview
-										source={msg.text}
-										style={{
-											background: "transparent",
-											color: "inherit",
-											fontFamily: "inherit",
-											fontSize: "inherit",
-										}}
-										className={`prose prose-sm max-w-none ${
-											darkMode ? "prose-invert" : ""
-										}`}
-									/>
-								) : (
-									<div className="whitespace-pre-wrap">{msg.text}</div>
-								)}
-							</div>
+							<MessageBubble msg={msg} />
 						</motion.div>
 					))}
 
@@ -292,26 +452,7 @@ export default function ChatPage() {
 										: "bg-white text-gray-800"
 								}`}
 							>
-								<div className="flex space-x-2">
-									<div
-										className={`w-2 h-2 rounded-full animate-bounce ${
-											darkMode ? "bg-blue-400" : "bg-blue-500"
-										}`}
-										style={{ animationDelay: "0ms" }}
-									></div>
-									<div
-										className={`w-2 h-2 rounded-full animate-bounce ${
-											darkMode ? "bg-blue-400" : "bg-blue-500"
-										}`}
-										style={{ animationDelay: "150ms" }}
-									></div>
-									<div
-										className={`w-2 h-2 rounded-full animate-bounce ${
-											darkMode ? "bg-blue-400" : "bg-blue-500"
-										}`}
-										style={{ animationDelay: "300ms" }}
-									></div>
-								</div>
+								<LoadingIndicator />
 							</div>
 						</motion.div>
 					)}
@@ -340,17 +481,21 @@ export default function ChatPage() {
 						<input
 							type="text"
 							value={input}
-							onChange={(e) => {
-								const value = e.target.value;
-								if (value.length <= 100) setInput(value);
-							}}
-							onKeyDown={(e) => e.key === "Enter" && handleSend(null)}
+							onChange={(e) =>
+								setInput(e.target.value.slice(0, MAX_MESSAGE_LENGTH))
+							}
+							onKeyDown={handleKeyDown}
 							className={`w-full border rounded-full px-5 pt-4 pb-2 pr-12 focus:outline-none focus:ring-2 transition-all duration-200 ${
 								darkMode
 									? "bg-gray-700 border-gray-600 focus:ring-blue-600 focus:border-transparent text-white"
 									: "bg-gray-50 border-gray-300 focus:ring-blue-500 focus:border-transparent"
 							}`}
-							placeholder="Tanya tentang menu kami..."
+							placeholder={
+								language === "id"
+									? "Tanya tentang menu kami..."
+									: "Ask about our menu..."
+							}
+							disabled={loading}
 						/>
 						{input && (
 							<motion.span
@@ -362,34 +507,11 @@ export default function ChatPage() {
 										: "text-gray-400 bg-gray-100"
 								}`}
 							>
-								{input.length}/100
+								{input.length}/{MAX_MESSAGE_LENGTH}
 							</motion.span>
 						)}
 					</motion.div>
-
-					<motion.button
-						whileHover={{ scale: 1.05 }}
-						whileTap={{ scale: 0.95 }}
-						onClick={() => handleSend(null)}
-						disabled={loading || !input.trim()}
-						className={`p-3 rounded-full shadow-lg transition-all duration-300 ${
-							loading || !input.trim()
-								? darkMode
-									? "bg-gray-600 text-gray-400 cursor-not-allowed"
-									: "bg-gray-300 text-gray-500 cursor-not-allowed"
-								: `text-white ${
-										darkMode
-											? "bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 shadow-blue-700/30"
-											: "bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 shadow-blue-500/30"
-								}`
-						}`}
-					>
-						{loading ? (
-							<FiRefreshCw className="w-5 h-5 animate-spin opacity-90" />
-						) : (
-							<FiSend className="w-5 h-5 hover:opacity-90 cursor-pointer" />
-						)}
-					</motion.button>
+					<SendButton />
 				</div>
 			</motion.div>
 		</div>

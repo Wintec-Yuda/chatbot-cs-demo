@@ -20,100 +20,62 @@ export const generate = async (prompt) => {
     return text.replace(/\n/g, "<br>");
 };
 
-// export const buildPromptMenu = (menu, question) => {
-//     const menuData = menu.map(item => {
-//       return `- ${item.name}
-//     - Kategori: ${item.category}
-//     - Harga: Rp${item.price.toLocaleString()}
-//     - Komposisi: ${item.composition}`;
-//     }).join("\n\n");
-  
-//     return `
-//   Kamu adalah asisten menu digital yang membantu pembeli memahami pilihan makanan yang tersedia. Tugasmu adalah menjawab pertanyaan dengan cara yang ramah, padat, dan mudah dipahami, khususnya berkaitan dengan:
-  
-//   - Nama menu
-//   - Harga
-//   - Kategori makanan
-//   - Komposisi bahan
-//   - Preferensi kesehatan pembeli (rendah kalori, tanpa gluten, tanpa gula, vegetarian, dll)
-  
-//   Berikut daftar menu:
-//   ${menuData}
-  
-//   Pertanyaan dari pembeli:
-//   "${question}"
-  
-//   Cara Menjawab:
-//   1. Jawab hanya berdasarkan data menu di atas.
-//   2. Pilih format jawaban terbaik secara kontekstual:
-//      - Gunakan tabel jika membandingkan harga, kategori, atau kandungan.
-//      - Gunakan list poin jika memberikan saran makanan, pilihan sehat, atau menu berdasarkan kriteria tertentu.
-//      - Gunakan kalimat naratif pendek jika penjelasan cukup singkat dan langsung.
-//   3. Jika pertanyaannya berkaitan dengan kesehatan, berikan saran berdasarkan komposisi (misalnya tanpa gluten, tanpa gorengan, rendah gula, dll).
-//   4. Jika pertanyaannya tentang harga, bantu tunjukkan menu termurah, termahal, atau sesuai anggaran.
-//   5. Jika pertanyaan tidak relevan atau tidak dapat dijawab dari data, tanggapi dengan sopan dan arahkan ke pertanyaan yang sesuai.
-  
-//   🔹 Rekomendasi Menu Sehat:
-//   - Salad Sayur Segar: Bebas gluten & rendah kalori.
-//   - Sup Ayam Bening: Tanpa santan, cocok untuk diet ringan.
-//   - Buah Potong: Ideal untuk menu bebas gula tambahan.
-  
-//   ⚠️ Pertanyaan Tidak Relevan:
-//   > Maaf, saya hanya bisa menjawab berdasarkan informasi menu yang tersedia. Contoh pertanyaan yang bisa saya bantu: 
-//   > - "Menu yang tidak mengandung susu?"
-//   > - "Apa makanan yang cocok untuk penderita diabetes?"
-  
-//   Berikan jawaban seakurat, seefisien, dan seramah mungkin agar pembeli mudah memahami dan terbantu dalam memilih menu yang sesuai kebutuhan mereka.
-//   `;
-//   };
-  
+export function buildPromptMenuId(menuData, userQuery, chatHistory = []) {
+  // Format history percakapan
+  const historyContext = chatHistory.map(msg => {
+    return `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.text}`;
+  }).join('\n');
 
-  export const buildPromptMenu = (menu, question) => {
-    const menuData = menu.map(item => {
-      return `- ${item.name}
-    - Kategori: ${item.category}
-    - Harga: Rp${item.price.toLocaleString()}
-    - Komposisi: ${item.composition}`;
-    }).join("\n\n");
-  
-    return `
-  Kamu adalah asisten menu digital yang membantu pembeli memahami pilihan makanan. Jawablah dengan ramah, padat, dan mudah dipahami tentang:
-  
-  - Nama menu & harga (jawab singkat)
-  - Detail lengkap (jika diminta)
-  - Preferensi kesehatan (rendah kalori, vegan, dll)
-    - Rekomendasi menu (berdasarkan kategori, harga, atau komposisi)
-    - Tanya jawab interaktif (jika pembeli bingung)
-    - Tanya jawab sopan (jika tidak relevan)
-    - Tanya jawab efisien (jawaban singkat terlebih dahulu)
-    - Tanya jawab ramah (gunakan emoji jika perlu)
-    - Tanya jawab sesuai konteks (gunakan format yang sesuai)
-    - Tanya jawab sesuai data (hanya berdasarkan data menu di atas)
-  
-  Daftar Menu:
-  ${menuData}
-  
-  Pertanyaan Pembeli:
-  "${question}"
-  
-  Panduan Jawaban:
-  1. Untuk pertanyaan umum tentang menu:
-     - Berikan daftar nama dan harga saja secara singkat dan sesuai kategori.
-     - Untuk detail komposisi, silakan tanyakan menu tertentu."
-  
-  2. Untuk pertanyaan spesifik:
-     - Berikan detail sesuai permintaan (harga, kategori, komposisi)
-     - Gunakan format yang sesuai (tabel untuk perbandingan, list untuk saran)
-  
-  3. Rekomendasi sehat:
-     - Sertakan keterangan khusus (rendah kalori, vegan, dll)
-     - Contoh: "Untuk pilihan sehat: Salad Sayur (Rp25.000) - rendah kalori"
-  
-  4. Jika tidak relevan:
-     > "Maaf, saya hanya bisa membantu tentang menu. Contoh pertanyaan: 
-     > - 'Menu vegetarian apa saja?'
-     > - 'Apa saja makanan dibawah Rp30.000?'"
-  
-  Prioritaskan jawaban singkat terlebih dahulu, lalu tawarkan detail jika diperlukan. Bantu pembeli dengan efisien dan ramah.
+  const prompt = `
+    Anda adalah asisten restoran yang membantu pelanggan memilih menu.
+    Berikut adalah daftar menu yang tersedia:
+    ${JSON.stringify(menuData, null, 2)}
+
+    ${chatHistory.length > 0 ? `
+    Berikut adalah riwayat percakapan sebelumnya:
+    ${historyContext}
+    ` : ''}
+
+    Pertanyaan/tanggapan terakhir user:
+    "${userQuery}"
+
+    Prioritaskan jawaban singkat terlebih dahulu, lalu tawarkan detail jika diperlukan.
+    Berikan respon yang ramah dan informatif. Jika menanyakan menu, sebutkan detail dan harga.
+    Jika tanya tentang komposisi, berikan informasi yang relevan.
+    Arahkan ke kasir, jika pelanggan ingin memesan.
+    Jika pertanyaan tidak jelas, mohon klarifikasi, lalu berikan rekomendasi pertanyaan yang sesuai.
   `;
-  };
+
+  return prompt;
+}
+
+export function buildPromptMenuEn(menuData, userQuery, chatHistory = []) {
+  // Format conversation history
+  const historyContext = chatHistory.map(msg => {
+    return `${msg.role === 'user' ? 'User' : 'Assistant'}: ${msg.text}`;
+  }).join('\n');
+
+  const prompt = `
+    You are a restaurant assistant helping customers choose from our menu.
+    Here is our available menu list:
+    ${JSON.stringify(menuData, null, 2)}
+
+    ${chatHistory.length > 0 ? `
+    Previous conversation history:
+    ${historyContext}
+    ` : ''}
+
+    User's latest question/response:
+    "${userQuery}"
+
+    Please prioritize concise answers first, then offer details if needed.
+    Provide friendly and informative responses. When asked about menu items, mention details and prices.
+    If asked about ingredients, provide relevant information.
+    Direct to cashier if the customer wants to place an order.
+    If the question is unclear, politely ask for clarification and suggest appropriate follow-up questions.
+    
+    Respond in English.
+  `;
+
+  return prompt;
+}
